@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://rentavideojuegos.db.4232052.71b.hostedresource.net:3306/rentavideojuegos?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">rentavideojuegos</property>
+    <property name="hibernate.connection.password">Juegos%1</property>
+
+    <property name="current_session_context_class">thread</property> 
+    <!-- Disable the second-level cache -->
+    <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+    <!-- Echo all executed SQL to stdout -->
+    <property name="show_sql">true</property> 
+    <!-- Drop and re-create the database schema on startup -->
+    <property name="hbm2ddl.auto">update</property> 
+    <mapping class="pos.bl.Plataforma"/>
+    <mapping class="pos.bl.Producto"/>    
+    <mapping class="pos.bl.Factura"/>
+    <mapping class="pos.bl.FacturaDetalle"/>
+  </session-factory>
+</hibernate-configuration>
