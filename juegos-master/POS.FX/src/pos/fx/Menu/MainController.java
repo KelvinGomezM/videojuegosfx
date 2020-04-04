@@ -22,6 +22,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import net.sf.jasperreports.engine.JRException;
+import pos.fx.ReporteProductoViewer;
 
 public class MainController implements Initializable, AbrirFormularioCallback {
 
@@ -120,14 +122,19 @@ public class MainController implements Initializable, AbrirFormularioCallback {
                 case "Clientes":
                     nombreFxml = "FormCliente.fxml";
                     break;
-                case "Reportes":
-                    nombreFxml = "FormReportes.fxml";
+                case "Reporte":
+                {
+                    ReporteProductoViewer reporteViewer = new ReporteProductoViewer();
+                    reporteViewer.mostrarReporte();
                     break;
+                }
             }
             
             form = FXMLLoader.load(getClass().getResource(("/pos/fx/" + nombreFxml)));
             drawerStack.setContent(form);
         } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }
