@@ -17,13 +17,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import net.sf.jasperreports.engine.JRException;
-import pos.fx.ReporteProductoViewer;
+import pos.fx.ReporteFacturasViewer;
+import pos.fx.ReporteProductosViewer;
 
 public class MainController implements Initializable, AbrirFormularioCallback {
 
@@ -110,7 +110,7 @@ public class MainController implements Initializable, AbrirFormularioCallback {
 
     @Override
     public void abrirFormulario(String nombreFormulario) {
-              try {
+        try {
             String nombreFxml = "";
             switch(nombreFormulario) {
                 case "Productos":
@@ -122,19 +122,19 @@ public class MainController implements Initializable, AbrirFormularioCallback {
                 case "Clientes":
                     nombreFxml = "FormCliente.fxml";
                     break;
-                case "Reporte":
-                {
-                    ReporteProductoViewer reporteViewer = new ReporteProductoViewer();
-                    reporteViewer.mostrarReporte();
+                case "Reporte de Productos":
+                    nombreFxml = "FormReporteProductos.fxml";
                     break;
+                case "Reporte de Facturas":
+                {
+                   nombreFxml = "FormReporteFacturas.fxml";
+                   break;
                 }
             }
             
             form = FXMLLoader.load(getClass().getResource(("/pos/fx/" + nombreFxml)));
             drawerStack.setContent(form);
         } catch (IOException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }

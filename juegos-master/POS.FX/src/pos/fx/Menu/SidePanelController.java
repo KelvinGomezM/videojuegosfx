@@ -3,9 +3,11 @@ package pos.fx.Menu;
 import com.jfoenix.controls.JFXListView;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 public class SidePanelController implements Initializable {
 
@@ -19,17 +21,21 @@ public class SidePanelController implements Initializable {
         listView.getItems().add(new Label("Productos"));
         listView.getItems().add(new Label("Clientes"));
         listView.getItems().add(new Label("Facturas"));
-        listView.getItems().add(new Label("Reporte"));   
+        listView.getItems().add(new Label("Reporte de Productos"));
+        listView.getItems().add(new Label("Reporte de Facturas"));
         listView.getItems().add(new Label("Salir"));   
         
-        listView.setOnMouseClicked(event -> {
-            Label label = (Label) listView.getSelectionModel().getSelectedItem();
-            
-            if (label.getText().equals("Salir")) {
-                System.exit(0);
-            } else {
-                callback.abrirFormulario(label.getText());    
-            }           
+        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Label label = (Label) listView.getSelectionModel().getSelectedItem();
+                
+                if (label.getText().equals("Salir")) {
+                    System.exit(0);
+                } else {           
+                    callback.abrirFormulario(label.getText());
+                }
+            }
         });
     }
 
