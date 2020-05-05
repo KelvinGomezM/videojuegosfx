@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="POS.FX.jar" size="99168" download="eager" />
-    <jar href="lib\POS.BL.jar" size="25993" download="eager" />
+    <jar href="POS.FX.jar" size="165727" download="eager" />
+    <jar href="lib\POS.BL.jar" size="31545" download="eager" />
     <jar href="lib\antlr-2.7.7.jar" size="437548" download="eager" />
     <jar href="lib\c3p0-0.9.2.1.jar" size="422423" download="eager" />
     <jar href="lib\commons-beanutils-1.8.2.jar" size="231891" download="eager" />

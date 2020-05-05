@@ -6,10 +6,13 @@
 package pos.fx;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import pos.bl.Usuario;
 
 /**
  *
@@ -18,20 +21,36 @@ import javafx.stage.Stage;
 public class POSFX extends Application {
     public static Boolean isSplashLoaded = false;
     static Stage stage;
-    public static Stage getStage()
-    {
+    static Usuario usuario;
+    
+    public static Stage getStage() {
         return stage;
     }
     
+    public static Usuario getUsuarioAutenticado() {
+        return usuario;
+    }
+    
+    public static void setUsuarioAutenticado(Usuario usuario) {
+        POSFX.usuario = usuario;
+    }
+    
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception {        
+        stage.setOnCloseRequest((WindowEvent t) -> {
+            Platform.exit();
+            System.exit(0);
+        });
+        
         POSFX.stage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("/pos/fx/Menu/main.fxml"));
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("/pos/fx/FormLogin.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
-        stage.setTitle("Venta de Videojuegos");        stage.show();
+        stage.setTitle("Ingresar al Sistema");
+        stage.show();
     }
 
     /**

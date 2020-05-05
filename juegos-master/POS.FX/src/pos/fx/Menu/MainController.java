@@ -15,6 +15,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -24,10 +26,9 @@ import javafx.util.Duration;
 import net.sf.jasperreports.engine.JRException;
 import pos.fx.ReporteFacturasViewer;
 import pos.fx.ReporteProductosViewer;
-
 public class MainController implements Initializable, AbrirFormularioCallback {
 
-    @FXML
+   @FXML
     private JFXDrawer drawer;
     
     @FXML
@@ -55,6 +56,8 @@ public class MainController implements Initializable, AbrirFormularioCallback {
             SidePanelController controller = loader.getController();
             controller.setCallback(this);
             drawer.setSidePane(box);
+            
+            abrirFormularioPredeterminado();
             
             FitControlsToWindow();
         } catch (IOException ex) {
@@ -113,15 +116,15 @@ public class MainController implements Initializable, AbrirFormularioCallback {
         try {
             String nombreFxml = "";
             switch(nombreFormulario) {
+                case "Inicio":
+                    nombreFxml = "FormTablero.fxml";
+                    break;
                 case "Productos":
                     nombreFxml = "FormProducto.fxml";
                     break;
                 case "Facturas":
                     nombreFxml = "FormFactura.fxml";
                     break;                    
-                case "Clientes":
-                    nombreFxml = "FormCliente.fxml";
-                    break;
                 case "Reporte de Productos":
                     nombreFxml = "FormReporteProductos.fxml";
                     break;
@@ -129,6 +132,11 @@ public class MainController implements Initializable, AbrirFormularioCallback {
                 {
                    nombreFxml = "FormReporteFacturas.fxml";
                    break;
+                }
+                case "Cerrar Sesión":
+                {
+                    cerrarSesion();
+                    return;
                 }
             }
             
@@ -172,5 +180,36 @@ public class MainController implements Initializable, AbrirFormularioCallback {
             form.setPrefWidth(stage.getWidth());
             form.setPrefHeight(stage.getHeight());
         }
+    }
+
+    private void cerrarSesion() throws IOException {
+        Stage stage = POSFX.getStage();
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("/pos/fx/FormLogin.fxml"));
+        
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        stage.setTitle("Ingresar al Sistema");
+        stage.show();        
+    }
+
+    private void abrirFormularioPredeterminado() {
+        String role = POSFX.getUsuarioAutenticado().getRole();
+        
+        switch(role) {
+            case "Administrador": {
+                abrirFormulario("Inicio");
+                break;
+            }
+            case "Cajero": {
+                abrirFormulario("Facturas");              
+                break;
+            }
+            case "Inventario": {
+                abrirFormulario("Productos");                   
+                break;
+            }            
+        }        
     }
 }
