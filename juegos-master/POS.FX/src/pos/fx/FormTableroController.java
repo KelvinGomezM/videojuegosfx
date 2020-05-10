@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5792fa80f188baa432ddf06183e879a1db82f69c
 package pos.fx;
 
 import java.net.URL;
@@ -73,7 +76,11 @@ public class FormTableroController implements Initializable {
         facturasServicio = new FacturasServicio();
         
         cargarDatosdelBarChart();
+<<<<<<< HEAD
         cargarDatosdelPieChart();
+=======
+        //cargarDatosdelPieChart();
+>>>>>>> 5792fa80f188baa432ddf06183e879a1db82f69c
         cargarDatosUltimasFacturasEmitidas();
     }    
 
